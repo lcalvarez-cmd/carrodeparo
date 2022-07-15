@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="fragments/head :: head">
+		<link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+	</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+   	<div id="wrapper">
+		<div th:insert="fragments/menu :: menu-principal"></div>
+		 <div id="content-wrapper" class="d-flex flex-column">
+		 	<div id="content"> <!--  Inicio de contenido -->
+		 	
+		 	<nav th:insert="fragments/topbar :: top-bar"></nav>	
+		 	<div id="content-wrapper" class="d-flex flex-column">
+			 	<div id="content">
+			 		<div class="container-fluid">
+				 		<div class="row">
+				 		
+				 			<div class="card shadow mb-4">
+                        <div class="text-center card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Registro Seguimiento de Medicamentos</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive Jtablescroll">
+                                <table class="table table-bordered" id="dataTable" >
+                                    <thead>
+                                        <tr>
+                                            <th>Medicamento</th>
+                                            <th>Concentraci&oacute;n</th>
+                                            <th>Cantidad</th>
+                                            <th>Lote</th>
+                                            <th>Fecha de Vencimiento</th>
+                                            <th>Registro Invima</th>
+                                            <th>Fecha de Revisi&oacute;n</th>
+                                            <th>Firma revisi&oacute;n</th>
+                                            <th>Fecha de Cambio</th>
+                                            <th>Raz&oacute;n de cambio</th>
+                                            <th>Firma de quien cambio</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+<!--                                      <tr th:each="lote: ${lotes}" th:style="${lote.estado.id_estado == 3 ? 'background-color:#B43C3C'  : 'color: black'}" > --> 
+                                        <tr th:each="lote: ${lotes}"  th:class="'px-3 py-5 '+ ((${lote.estado.id_estado} == 3) ? 'bg-warning text-white' : ((${lote.estado.id_estado} ==2 ) ? 'bg-danger text-white shadow' : ''))" >
+                                        	<td th:text="${lote.cardio_vas_medicamento.nombre}"></td>
+                                            <td th:text="${lote.concentracion}"></td>
+											<td th:text="${lote.cantidad}"></td>
+											<td th:text="${lote.lote}"></td>
+											<td th:text="${#dates.format(lote.fecha_vencimiento, 'dd-MM-yyyy')}"></td>
+											<td th:text="${lote.registro_invima}"></td>
+											<td th:text="${#dates.format(lote.cardio_vas_medicamento.fecha_revision, 'dd-MM-yyyy')}"></td>
+											<td  th:text="${lote.cardio_vas_medicamento.firma_revision}"></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td class="text-center"> <!-- Botones opciones -->
+												<div class="btn-group">
+													<div > <!-- condicion para mostrar o ocultar -->
+														<a  th:href="@{/cardiovascular/firmarevision/{id}  (id=${lote.id_lote})}" rel="icon" data-toggle="tooltip" data-original-title="firmar estado" class="btn btn-success btn-circle btn-sm" >
+					                                        <i class="fas fa-check"></i>
+					                                    </a>
+													</div>
+													<div > <!-- condicion para mostrar o ocultar -->
+														<a th:href="@{/cardiovascular/modificarmedicamento/{id} (id=${lote.id_lote})}"  rel="icon" data-toggle="tooltip" data-original-title="Registrar Cambio" class="btn btn-secondary btn-circle btn-sm">
+					                                        <i class="fas fa-exclamation-triangle"></i>
+					                                    </a>
+													</div>
+												</div>
+											</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                               </div>
+                           </div>
+                        </div>
+                                    
+				 		
+				 		
+				 		</div>
+				 	</div>
+				 </div>
+			</div>	 	
+		 	
+		 	
+		 	</div> <!-- Fin contenido -->
+			<footer th:insert="fragments/footer :: footer" ></footer>
+		</div>
+	</div>
+	
+	
+	<!-- Bootstrap core JavaScript-->
+    <script th:src="@{/bootstrap2/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap2/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/bootstrap2/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/bootstrap2/js/sb-admin-2.min.js}"></script>
+    <!-- Page level plugins -->
+    <script th:src="@{/bootstrap2/vendor/chart.js/Chart.min.js}"></script>
+    <!-- Page level custom scripts -->
+    <script th:src="@{/bootstrap2/js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/bootstrap2/js/demo/chart-pie-demo.js}"></script>
+    
+    <script type="text/javascript">
+    $(function () {
+    	  $('[data-toggle="tooltip"]').tooltip()
+    	})
+    </script>
+</body>
+</html>

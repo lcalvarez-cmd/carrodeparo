@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="fragments/head :: head">
+		<link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+	</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+   	<div id="wrapper">
+		<div th:insert="fragments/menu :: menu-principal"></div>
+		 <div id="content-wrapper" class="d-flex flex-column">
+		 	<div id="content"> <!--  Inicio de contenido -->
+			 	<nav th:insert="fragments/topbar :: top-bar"></nav>	
+			 	<div id="content-wrapper" class="d-flex flex-column">
+				 	<div id="content">
+				 		<div class="container-fluid">
+					 		<div class="row">
+					 			<div class="col-lg-12 mb-4">
+					 				<div class="card shadown mb-4">
+					 					<div class="text-center card-header py-3">
+					 						<h6 class="m-0 font-wight-bold text-primary">REGISTRO DE SEGUIMIENTO DE MEDICAMENTOS</h6>
+					 					</div>
+								 		<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${msj != null}"
+										     th:text="${msj}"
+										     class="alert">
+										</div>
+					 					<div class="card-body">
+<!--  FORMULARIO -->
+					 						<form class="user" th:action="@{/cardiovascular/medicamento/save}" th:object="${cardio_vas_lote}" method="post" > <!--  -->
+					 							<hr><!-- ./ primeros campos -->
+					 							<div class="form-group row">
+					 								<div class="col-sm-3 mb-3 mb-sm-0">
+					 									<input type="text" th:field="*{cardio_vas_medicamento.nombre}" name="medicamento" id="medicamento" class="form-control form-control-user" placeholder="Medicamento" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+					 								</div>
+					 							</div>
+				                                <div class="form-group row">
+				                                    <div class="col-sm-4 mb-3 mb-sm-0">
+				                                        <input type="text" th:field="*{concentracion}" name="concentracion" id="concentracion" class="form-control form-control-user" placeholder="Concentracion" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+				                                    </div>
+				                                    <div class="col-sm-4">
+				                                        <input type="number" th:field="*{cantidad}" name="cantidad" id="cantidad" class="form-control form-control-user" placeholder="Cantidad" >
+				                                    </div>
+				                                    <div class="col-sm-4">
+				                                        <input type="text" th:field="*{lote}" name="lote" id="lote" class="form-control form-control-user" placeholder="Lote" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+				                                    </div>
+				                                </div>
+				                                <div class="form-group row">
+				                                    <div class="col-sm-6">
+				                                        <input type="text" th:field="*{registro_invima}" name="registroinvima" id="registroinvima" class="form-control form-control-user" placeholder="Registro invima" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+				                                    </div>
+				                                </div>
+				                                <div class="form-group row">
+				                                	<div class="col-sm-4">
+				                                        <div class="row">
+					                                        <div class="col-sm-4 mb-3 mb-sm-0">
+					                                        	<span>Feha vencimiento</span>
+					                                        </div>
+					                                        <div class="col-sm-4 mb-3 mb-sm-0">
+					                                        	<input  th:field="*{fecha_vencimiento}" class="form-control form-control-user" type="date" id="fecha" name="fecha" value="" min="fechamin" >
+					                                        </div>
+				                                        </div>
+				                                    </div>
+				                                </div>
+				                                 <hr>
+				                                 <div class="d-flex flex-row-reverse">
+				                                	<div class="col-sm-3  p-5">
+				                                		<button type="submit" title="Guardar" class="btn btn-primary btn-user btn-block"> Guardar </button>
+				                                	</div>
+				                                </div>
+				                                <hr>
+				                            </form>				 						
+<!-- FIN FORMULARIO -->
+					 					</div>
+					 				</div>
+					 			</div>
+					 		</div>
+					 	</div>
+				 	</div>
+			 	</div>
+		 	</div> <!-- Fin contenido -->
+			<footer th:insert="fragments/footer :: footer" ></footer>
+		</div>
+	</div>
+	
+	
+	 <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/bootstrap2/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap2/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/bootstrap2/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/bootstrap2/js/sb-admin-2.min.js}"></script>
+    <!-- Page level plugins -->
+    <script th:src="@{/bootstrap2/vendor/chart.js/Chart.min.js}"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    
+    <script type="text/javascript">
+	    function mayus(e) {
+	        e.value = e.value.toUpperCase();
+	    }
+		$(document).ready(function(){		
+// 			let URLactual = window.location.href;
+// 			let fecha = new Date();
+// 			console.log ('hola '+fecha);
+// 			$('.fecha').val(new Date());
+			
+		});
+		$(function() {
+		    
+		    $( "#datepicker" ).datepicker({
+// 		    	  beforeShowDay: $.datepicker.noWeekends,
+// 		    	appendText: "(yyyy-mm-dd)" 	  
+		    	});
+		  } );
+		
+	</script>
+</body>
+</html>
